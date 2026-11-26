@@ -172,7 +172,7 @@
     </main>
 
     <!-- ANIME DETAIL MODAL -->
-    <div id="animeModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div id="animeModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-start justify-center p-4 overflow-y-auto">
         <div class="relative bg-dark-card border border-dark-border rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl my-8">
             <button onclick="closeModal()" class="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-black/70 text-white flex items-center justify-center hover:bg-amber-gold hover:text-black transition">
                 <i class="fa-solid fa-xmark text-lg"></i>
@@ -541,7 +541,18 @@
 
         function closeModal() {
             document.getElementById('animeModal').classList.add('hidden');
+            document.getElementById('modalContent').innerHTML = ''; // coupe la vidéo
         }
+
+        // Fermer avec la touche Échap
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Fermer en cliquant à côté de la fiche
+        document.getElementById('animeModal').addEventListener('click', e => {
+            if (e.target.id === 'animeModal') closeModal();
+        });
 
         function isFavorite(id) {
             return favorites.some(fav => fav.id === id);
